@@ -65,4 +65,8 @@ public class Campaign {
     public double getTargetAmount() {
         return targetAmount;
     }
+
+    public void addDonation(Donation donation) {
+        donations.add(donation);
+    }
 }
