@@ -23,8 +23,7 @@ public class DonationService {
     public Donation addDonation(Donation donation, Long campaignId) throws CampaignNotFoundException {
         Optional<Campaign> campaign = campaignRepository.findById(campaignId);
         if (!campaign.isPresent()) throw new CampaignNotFoundException(null);
-        donationRepository.save(donation);
-        campaign.get().addDonation(donation);
-        return donation;
+        donation.setCampaign(campaign.get());
+        return donationRepository.save(donation);
     }
 }

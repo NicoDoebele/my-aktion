@@ -69,4 +69,8 @@ public class Campaign {
     public void addDonation(Donation donation) {
         donations.add(donation);
     }
+
+    public List<Donation> getDonations() {
+        return donations;
+    }
 }

@@ -32,6 +32,10 @@ public class Donation {
     @ManyToOne
     private Campaign campaign;
 
+    public void setCampaign(Campaign campaign) {
+        this.campaign = campaign;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

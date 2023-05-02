@@ -15,12 +15,10 @@ public class CampaignService {
     private CampaignRepository campaignRepository;
 
     public Campaign addCampaign(Campaign campaign) {
-        campaignRepository.save(campaign);
-        return campaign;
+        return campaignRepository.save(campaign);
     }
 
     public List<Campaign> getCampaigns() {
-        List<Campaign> campaigns = campaignRepository.findAll();
-        return campaigns;
+        return campaignRepository.findAll();
     }
 }
