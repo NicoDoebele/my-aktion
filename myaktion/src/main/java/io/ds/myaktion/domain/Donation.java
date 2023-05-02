@@ -2,6 +2,8 @@ package io.ds.myaktion.domain;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -21,6 +23,7 @@ public class Donation {
         IN_PROCESS, TRANSFERRED
     }
 
+    @Enumerated(EnumType.STRING)
     private Status status = Status.IN_PROCESS;
 
     @Embedded
