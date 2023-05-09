@@ -98,7 +98,11 @@ public class Campaign {
 
         String donationsString = "[";
 
+        boolean firstIteration = true;
+
         for (Donation donation : donations) {
+            if (!firstIteration) donationsString += ",";
+            else firstIteration = false;
             donationsString += donation.getId().toString();
         }
 
