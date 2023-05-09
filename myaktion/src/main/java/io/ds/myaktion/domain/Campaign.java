@@ -2,6 +2,7 @@ package io.ds.myaktion.domain;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -77,5 +78,10 @@ public class Campaign {
 
     public List<Donation> getDonations() {
         return donations;
+    }
+
+    @Override
+    public String toString() {
+        return "id: " + id + " name: " + name + " donation minimum: " + donationMinimum + " target amount: " + targetAmount + " with account: " + Objects.toString(account, "null");
     }
 }

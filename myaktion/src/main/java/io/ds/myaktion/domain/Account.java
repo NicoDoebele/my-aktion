@@ -31,4 +31,9 @@ public class Account {
     public String getNameOfBank() {
         return nameOfBank;
     }
+
+    @Override
+    public String toString() {
+        return "iban: " + iban + " account name: " + name + " bank name: " + nameOfBank;
+    }
 }

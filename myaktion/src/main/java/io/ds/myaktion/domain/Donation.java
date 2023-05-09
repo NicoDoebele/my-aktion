@@ -1,5 +1,7 @@
 package io.ds.myaktion.domain;
 
+import java.util.Objects;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -80,5 +82,10 @@ public class Donation {
 
     public Status getStatus() {
         return status;
+    }
+
+    @Override
+    public String toString() {
+        return "id: " + id + " amount: " + amount + " receipt requested: " + receiptRequested + " donor name: " + donorName + " status: " + status + " in campaign: " + Objects.toString(campaign, "null");
     }
 }
