@@ -25,7 +25,8 @@ public class DonationService {
     public Donation addDonation(Donation donation, Long campaignId) throws CampaignNotFoundException {
         Campaign campaign = campaignRepository.findById(campaignId).orElseThrow(() -> new CampaignNotFoundException(null));
         donation.setCampaign(campaign);
-        log.trace("Adding donation " + donation.toString() + " to campaign with id " + campaignId);
-        return donationRepository.save(donation);
+        Donation addeDonation = donationRepository.save(donation);
+        log.trace("Added donation " + addeDonation.toString() + " to campaign with id " + campaignId);
+        return addeDonation;
     }
 }

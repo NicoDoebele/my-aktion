@@ -20,8 +20,9 @@ public class CampaignService {
     private static final Logger log = LoggerFactory.getLogger(CampaignService.class);
 
     public Campaign addCampaign(Campaign campaign) {
-        log.trace("Adding campaign " + campaign.toString());
-        return campaignRepository.save(campaign);
+        Campaign addedCampaign = campaignRepository.save(campaign);
+        log.trace("Added campaign " + addedCampaign.toString());
+        return addedCampaign;
     }
 
     public List<Campaign> getCampaigns() {
@@ -30,8 +31,9 @@ public class CampaignService {
     }
 
     public Campaign getCampaignById(long id) throws CampaignNotFoundException {
-        log.trace("Getting campaign with id " + id);
-        return campaignRepository.findById(id).orElseThrow(() -> new CampaignNotFoundException(null));
+        Campaign campaign = campaignRepository.findById(id).orElseThrow(() -> new CampaignNotFoundException(null));
+        log.trace("Got campaign " + campaign.toString());
+        return campaign;
     }
 
     public void deleteCampaign(long id) {
@@ -42,12 +44,14 @@ public class CampaignService {
     public Campaign updateCampaign(long id, Campaign newCampaign) throws CampaignNotFoundException {
         Campaign campaign = campaignRepository.findById(id).orElseThrow(() -> new CampaignNotFoundException(null));
 
-        log.trace("Replacing campaign id " + id + " with campaign " + newCampaign.toString());
-
         newCampaign.setId(campaign.getId());
 
         campaignRepository.deleteById(campaign.getId());
 
-        return campaignRepository.save(newCampaign);
+        Campaign addedCampaign = campaignRepository.save(newCampaign);
+
+        log.trace("Replaced campaign with id " + id + " with campaign " + addedCampaign.toString());
+
+        return addedCampaign;
     }
 }

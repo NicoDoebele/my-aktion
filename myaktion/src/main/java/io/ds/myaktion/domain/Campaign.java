@@ -95,7 +95,17 @@ public class Campaign {
 
     @Override
     public String toString() {
+
+        String donationsString = "[";
+
+        for (Donation donation : donations) {
+            donationsString += donation.getId().toString();
+        }
+
+        donationsString += "]";
+
+
         return "Campaign [id=" + id + ", name=" + name + ", donationMinimum=" + donationMinimum + ", targetAmount="
-                + targetAmount + ", account=" + Objects.toString(account, "null") + ", donations=" + "UNIMPLEMENTED" + "]";
+                + targetAmount + ", account=" + Objects.toString(account, "null") + ", donationIds=" + donationsString + "]";
     }
 }
