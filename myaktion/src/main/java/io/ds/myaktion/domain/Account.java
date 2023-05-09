@@ -34,6 +34,6 @@ public class Account {
 
     @Override
     public String toString() {
-        return "iban: " + iban + " account name: " + name + " bank name: " + nameOfBank;
+        return "Account [iban=" + iban + ", name=" + name + ", nameOfBank=" + nameOfBank + "]";
     }
 }

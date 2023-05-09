@@ -37,11 +37,24 @@ public class Campaign {
     })
     private Account account;
 
+    @JsonProperty(access=Access.READ_ONLY)
     @OneToMany(mappedBy = "campaign", cascade= CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Donation> donations = new LinkedList<Donation>();
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public void setDonations(List<Donation> donations) {
+        this.donations = donations;
     }
 
     public void setName(String name) {
@@ -82,6 +95,7 @@ public class Campaign {
 
     @Override
     public String toString() {
-        return "id: " + id + " name: " + name + " donation minimum: " + donationMinimum + " target amount: " + targetAmount + " with account: " + Objects.toString(account, "null");
+        return "Campaign [id=" + id + ", name=" + name + ", donationMinimum=" + donationMinimum + ", targetAmount="
+                + targetAmount + ", account=" + Objects.toString(account, "null") + ", donations=" + "UNIMPLEMENTED" + "]";
     }
 }

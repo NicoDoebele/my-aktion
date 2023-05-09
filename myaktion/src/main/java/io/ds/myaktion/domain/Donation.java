@@ -44,6 +44,14 @@ public class Donation {
         this.campaign = campaign;
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public Campaign getCampaign() {
+        return campaign;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -86,6 +94,11 @@ public class Donation {
 
     @Override
     public String toString() {
-        return "id: " + id + " amount: " + amount + " receipt requested: " + receiptRequested + " donor name: " + donorName + " status: " + status + " in campaign: " + Objects.toString(campaign, "null");
+        return "Donation [id=" + id + ", amount=" + amount + ", receiptRequested=" + receiptRequested + ", donorName="
+                + donorName + ", status=" + status + ", account=" + Objects.toString(account, "null") + ", campaign=" + Objects.toString(campaign, "null") + "]";
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }
