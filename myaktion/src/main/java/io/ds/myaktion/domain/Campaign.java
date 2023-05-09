@@ -12,6 +12,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import javax.persistence.Column;
 
 @Entity
@@ -19,6 +23,7 @@ public class Campaign {
 
     @Id
     @GeneratedValue
+    @JsonProperty(access=Access.READ_ONLY)
     private Long id;
 
     private String name;

@@ -1,7 +1,5 @@
 package io.ds.myaktion.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +19,8 @@ public class DonationService {
     private CampaignRepository campaignRepository;
 
     public Donation addDonation(Donation donation, Long campaignId) throws CampaignNotFoundException {
-        Optional<Campaign> campaign = campaignRepository.findById(campaignId);
-        if (!campaign.isPresent()) throw new CampaignNotFoundException(null);
-        donation.setCampaign(campaign.get());
+        Campaign campaign = campaignRepository.findById(campaignId).orElseThrow(() -> new CampaignNotFoundException(null));
+        donation.setCampaign(campaign);
         return donationRepository.save(donation);
     }
 }

@@ -8,11 +8,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 @Entity
 public class Donation {
 
     @Id
     @GeneratedValue
+    @JsonProperty(access=Access.READ_ONLY)
     private Long id;
 
     private double amount;
@@ -30,6 +35,7 @@ public class Donation {
     private Account account;
 
     @ManyToOne
+    @JsonIgnore
     private Campaign campaign;
 
     public void setCampaign(Campaign campaign) {
