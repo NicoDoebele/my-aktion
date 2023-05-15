@@ -9,6 +9,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,8 +25,13 @@ public class Donation {
     @JsonProperty(access=Access.READ_ONLY)
     private Long id;
 
+    @DecimalMin(value = "1.00", message = "The amount of the donation must be at least 1.")
     private double amount;
+
+    @NotNull
     private boolean receiptRequested;
+
+    @Size(min = 5, max = 40, message = "Length of donor name must be at least 5 and at most 40.")
     private String donorName;
 
     public enum Status {
@@ -31,6 +39,7 @@ public class Donation {
     }
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private Status status = Status.IN_PROCESS;
 
     @Embedded

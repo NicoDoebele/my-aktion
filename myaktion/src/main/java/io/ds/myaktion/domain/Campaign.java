@@ -13,6 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -27,8 +29,13 @@ public class Campaign {
     @JsonProperty(access=Access.READ_ONLY)
     private Long id;
 
+    @Size(min = 4, max = 30, message = "Length of campaign name must be at least 4 and at most 30.")
     private String name;
+
+    @DecimalMin(value = "1.00", message = "The amount of the donation must be at least 1.")
     private double donationMinimum;
+
+    @DecimalMin(value = "10.00", message = "The target amount of the campaign must be at least 10 Euro.")
     private double targetAmount;
 
     @Embedded
