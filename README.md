@@ -37,3 +37,9 @@ POST /campaigns/{id}/donations
 ```
 
 Adds a donation to the campaign with the given id.
+
+```
+GET /campaigns/{id}/donations
+```
+
+Returns the list of the donations of the campaign with the given id.
