@@ -35,6 +35,8 @@ public class MyaktionApplication {
 	CommandLineRunner runner() {
 		return (args) -> {
 
+			/*
+
 			log.info("Adding Sample data to DB");
 
 			Campaign campaignOne = new Campaign();
@@ -67,6 +69,8 @@ public class MyaktionApplication {
 					System.out.println(donation.getId());
 				}
 			}
+
+			*/
 		};
 	}
 

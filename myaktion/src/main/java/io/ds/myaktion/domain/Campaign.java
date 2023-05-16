@@ -13,9 +13,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -44,8 +46,11 @@ public class Campaign {
     })
     private Account account;
 
-    @JsonProperty(access=Access.READ_ONLY)
-    @OneToMany(mappedBy = "campaign", cascade= CascadeType.ALL, fetch = FetchType.EAGER)
+    @Transient
+    private double amountDonatedSoFar;
+
+    @OneToMany(mappedBy = "campaign", cascade= CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Donation> donations = new LinkedList<Donation>();
 
     public void setId(Long id) {
