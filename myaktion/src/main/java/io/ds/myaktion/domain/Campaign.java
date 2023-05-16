@@ -13,9 +13,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Size;
+
+import org.springframework.data.annotation.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -47,7 +48,16 @@ public class Campaign {
     private Account account;
 
     @Transient
+    @JsonProperty(access=Access.READ_ONLY)
     private double amountDonatedSoFar;
+
+    public double getAmountDonatedSoFar() {
+        return amountDonatedSoFar;
+    }
+
+    public void setAmountDonatedSoFar(double amountDonatedSoFar) {
+        this.amountDonatedSoFar = amountDonatedSoFar;
+    }
 
     @OneToMany(mappedBy = "campaign", cascade= CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
