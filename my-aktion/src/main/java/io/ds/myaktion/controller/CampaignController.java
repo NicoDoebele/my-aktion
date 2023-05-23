@@ -23,15 +23,7 @@ public class CampaignController {
 
     @GetMapping("/campaigns")
     List<Campaign> getCampaigns() {
-        List<Campaign> campaigns = campaignService.getCampaigns();
-
-        for (Campaign campaign : campaigns) {
-            Optional<Double> donationAmount = campaignService.getAmountDonatedSoFar(campaign.getId());
-            if (donationAmount.isPresent()) campaign.setAmountDonatedSoFar(donationAmount.get());
-            else campaign.setAmountDonatedSoFar(0);
-        }
-
-        return campaigns;
+        return campaignService.getCampaigns();
     }
 
     @PostMapping("/campaigns")
@@ -41,11 +33,7 @@ public class CampaignController {
 
     @GetMapping("/campaigns/{id}")
     Campaign getCampaignById(@PathVariable String id) {
-        Campaign campaign = campaignService.getCampaignById(Long.parseLong(id));
-        Optional<Double> donationAmount = campaignService.getAmountDonatedSoFar(campaign.getId());
-        if (donationAmount.isPresent()) campaign.setAmountDonatedSoFar(donationAmount.get());
-        else campaign.setAmountDonatedSoFar(0);
-        return campaign;
+        return campaignService.getCampaignById(Long.parseLong(id));
     }
 
     @PutMapping("/campaigns/{id}")

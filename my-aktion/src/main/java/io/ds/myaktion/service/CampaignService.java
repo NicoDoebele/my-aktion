@@ -20,10 +20,6 @@ public class CampaignService {
 
     private static final Logger log = LoggerFactory.getLogger(CampaignService.class);
 
-    public Optional<Double> getAmountDonatedSoFar(long campaignId) {
-        return campaignRepository.getAmountDonatedSoFar(campaignId);
-    }
-
     public Campaign addCampaign(Campaign campaign) {
         Campaign addedCampaign = campaignRepository.save(campaign);
         log.trace("Added campaign " + addedCampaign.toString());
@@ -32,11 +28,24 @@ public class CampaignService {
 
     public List<Campaign> getCampaigns() {
         log.trace("Getting all campaigns");
-        return campaignRepository.findAll();
+        List<Campaign> campaigns = campaignRepository.findAll();
+        
+        for (Campaign campaign : campaigns) {
+            Optional<Double> donationAmount = campaignRepository.getAmountDonatedSoFar(campaign.getId());
+            if (donationAmount.isPresent()) campaign.setAmountDonatedSoFar(donationAmount.get());
+            else campaign.setAmountDonatedSoFar(0);
+        }
+
+        return campaigns;
     }
 
     public Campaign getCampaignById(long id) throws CampaignNotFoundException {
         Campaign campaign = campaignRepository.findById(id).orElseThrow(() -> new CampaignNotFoundException(null));
+
+        Optional<Double> donationAmount = campaignRepository.getAmountDonatedSoFar(id);
+        if (donationAmount.isPresent()) campaign.setAmountDonatedSoFar(donationAmount.get());
+        else campaign.setAmountDonatedSoFar(0);
+
         log.trace("Got campaign " + campaign.toString());
         return campaign;
     }
